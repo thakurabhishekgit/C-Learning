@@ -179,6 +179,14 @@ class LinkConceptsScenario
 
 
 
+        var totalRev = payments.Where(p => p.Status == "Completed").Sum(p => p.Amount);
+        Console.WriteLine($"Total Revenue from Completed Payments: {totalRev}");
+
+        
+
+
+
+
 
 
     }
