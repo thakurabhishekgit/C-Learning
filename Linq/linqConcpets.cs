@@ -220,6 +220,52 @@ class LinkConceptsScenario
         }
 
 
+        var TotalRevenuefromCompleted = users.Join(payments,
+        u => u.Id, p => p.UserId,(u, p) => new
+        {
+            UserName = u.Name,
+            PaymentAmount = p.Amount,
+            PaymentStatus = p.Status,
+            City = u.City
+        }).Where(x => x.PaymentStatus == "Completed")
+        .GroupBy(x => x.City)
+        .Select(g => new
+        {
+            City = g.Key,
+            TotalRevenue = g.Sum(x => x.PaymentAmount)
+        })
+        .ToList();
+        Console.WriteLine("Total Revenue from Completed Payments by City:");
+        foreach (var item in TotalRevenuefromCompleted)
+        {
+            Console.WriteLine($"City: {item.City}, Total Revenue: {item.TotalRevenue}");
+        }
+
+
+        var avgAmountPerUser = users.Join(payments ,
+        u => u.Id, p => p.UserId, (u , p) => new
+        {
+            UserName = u.Name,
+            PaymentAmount = p.Amount,
+            PaymentStatus = p.Status,
+            City = u.City
+        }).GroupBy(x => x.UserName)
+        .Select(g => new
+        {
+            UserName = g.Key,
+            TotalAmount = g.Average(x => x.PaymentAmount)
+        })
+        .ToList();
+        Console.WriteLine("Average Payment Amount by User:");   
+        foreach (var item in avgAmountPerUser)
+        {
+            Console.WriteLine($"User: {item.UserName}, Average Payment Amount: {item.TotalAmount}");
+        }   
+
+
+
+
+
 
 
 
