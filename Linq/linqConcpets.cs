@@ -89,8 +89,25 @@ class LinkConceptsScenario
 
         var totalActiveUsers = users.Count(u => u.IsActive);
 
-        
+        //return only the names of active users
+        var activeUserNames = users.Where(u => u.IsActive)
+                                    .Select(u => u.Name)
+                                    .ToList();
 
+
+        var allCompletedPaymentsWithRoundedAmount = payments.Where(p => p.Status == "Completed")
+                                                        .Select(p => new
+                                                        {
+                                                            p.Id,
+                                                            p.UserId,
+                                                            RoundedAmount = Math.Round(p.Amount)
+                                                        })
+                                                        .ToList();
+        Console.WriteLine("Completed Payments with Rounded Amount:");
+        foreach (var payment in allCompletedPaymentsWithRoundedAmount)
+        {
+            Console.WriteLine($"Payment Id: {payment.Id}, UserId: {payment.UserId}, Rounded Amount: {payment.RoundedAmount}");
+        }
 
     }
 
