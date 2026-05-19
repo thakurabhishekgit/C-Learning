@@ -51,6 +51,16 @@ class LinkConceptsScenario
             new Payment { Id = 5, UserId = 5, Amount = 150.0, Status = "Completed" }
         };
 
+        // Example 1: Filter active users
+        var activeUsers = users.Where(u => u.IsActive).ToList();
+
+        Console.WriteLine("Active Users:");
+        foreach (var user in activeUsers)
+        {
+            Console.WriteLine($"Id: {user.Id}, Name: {user.Name}, Age: {user.Age}, City: {user.City}");
+        }
+        
+
         
     }
 

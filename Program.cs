@@ -7,6 +7,7 @@ using ControlFlowDemo.ControlFlowExamples;
 using ArraysDemo.Arr;
 using ListDemo.ListMethodsDemo;
 using ClassDemoWithExamples.ClassDemo;
+using LinkConceptsDemo;
 
 //is bad design because:namespace should not usually include class name IMPORTANT
 
@@ -48,7 +49,9 @@ namespace MainApp
             // Arr.TakeArrayInput();
 
             // ListMethodsDemo.ShowListMethods();
-            ClassDemo.Run();
+            // ClassDemo.Run();
+
+                LinkConceptsScenario.Run();
 
 
        }
