@@ -186,7 +186,38 @@ class LinkConceptsScenario
         Console.WriteLine($"Minimum Amount from Failed Payments: {s}");
 
 
-        
+        var groupedPayments = payments
+    .GroupBy(p => p.Status);
+
+        Console.WriteLine("Payments Grouped by Status:");
+        foreach (var group in groupedPayments)
+        {
+            Console.WriteLine($"Status: {group.Key}");
+            foreach (var payment in group)
+            {
+                Console.WriteLine($"  Payment Id: {payment.Id}, UserId: {payment.UserId}, Amount: {payment.Amount}");
+            }
+        }
+
+
+        var uByC = users.GroupBy(u => u.City);
+        Console.WriteLine("Users Grouped by City:");
+        foreach (var group in uByC)
+        {
+            Console.WriteLine($"City: {group.Key}");
+            foreach (var user in group)
+            {
+                Console.WriteLine($"  User Id: {user.Id}, Name: {user.Name}, Age: {user.Age}, IsActive: {user.IsActive}");
+            }
+
+        }
+
+
+        var CwithMu = users.GroupBy(u => u.City).OrderByDescending(g => g.Count()).FirstOrDefault();
+        if (CwithMu != null)
+        {
+            Console.WriteLine($"City with Most Users: {CwithMu.Key} (User Count: {CwithMu.Count()})");
+        }
 
 
 
