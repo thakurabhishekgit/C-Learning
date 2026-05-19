@@ -111,11 +111,11 @@ class LinkConceptsScenario
 
 
         var userPayments = users.Join(payments, u => u.Id, p => p.UserId, (u, p) => new
-        {
-            UserName = u.Name,
-            PaymentAmount = p.Amount,
-            PaymentStatus = p.Status
-        }).ToList();
+                                                                {
+                                                                    UserName = u.Name,
+                                                                    PaymentAmount = p.Amount,
+                                                                    PaymentStatus = p.Status
+                                                                }).ToList();
         Console.WriteLine("User Payments:");
         foreach (var up in userPayments)
         {
@@ -137,6 +137,29 @@ class LinkConceptsScenario
             Console.WriteLine($"User: {up.UserName}, Amount: {up.PaymentAmount}, Status: {up.PaymentStatus}");
         }
 
+        //Find all users who made completed payments.
+        var userPaymentsCompleted = users
+    .Join(
+        payments,
+        u => u.Id,
+        p => p.UserId,
+        (u, p) => new
+        {
+            UserName = u.Name,
+            PaymentAmount = p.Amount,
+            PaymentStatus = p.Status
+        })
+    .Where(x => x.PaymentStatus == "Completed")
+    .ToList();
+
+        Console.WriteLine("Users with Completed Payments:");
+        foreach (var up in userPaymentsCompleted)
+        {
+            Console.WriteLine($"User: {up.UserName}, Amount: {up.PaymentAmount}, Status: {up.PaymentStatus}");
+        }
+
+
+        var userWith
 
 
 
