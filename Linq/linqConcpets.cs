@@ -242,6 +242,8 @@ class LinkConceptsScenario
         }
 
 
+
+
         var avgAmountPerUser = users.Join(payments ,
         u => u.Id, p => p.UserId, (u , p) => new
         {
