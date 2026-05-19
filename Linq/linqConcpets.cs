@@ -60,6 +60,8 @@ class LinkConceptsScenario
             Console.WriteLine($"Id: {user.Id}, Name: {user.Name}, Age: {user.Age}, City: {user.City}");
         }
 
+
+        // Example 2: Filter inactive users
         var InactiveUsers = users.Where(u => !u.IsActive).ToList();
 
         Console.WriteLine("Inactive Users:");
@@ -69,9 +71,15 @@ class LinkConceptsScenario
         }
 
 
-        
+        // Example 3: Find user from Chicago
+        var userFromC = users.Where(u => u.City == "Chicago").FirstOrDefault();
 
-        
+        Console.WriteLine("User from Chicago:");
+        if (userFromC != null)
+        {
+            Console.WriteLine($"Id: {userFromC.Id}, Name: {userFromC.Name}, Age: {userFromC.Age}, City: {userFromC.City}");
+        }
+
     }
 
 }
