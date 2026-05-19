@@ -80,6 +80,18 @@ class LinkConceptsScenario
             Console.WriteLine($"Id: {userFromC.Id}, Name: {userFromC.Name}, Age: {userFromC.Age}, City: {userFromC.City}");
         }
 
+        var startsWithA = users.Where(u => u.Name.StartsWith("A")).ToList();
+
+
+        var anyUserFromLA = users.Any(u => u.City == "Los Angeles");
+        var allUsersAbove20 = users.All(u => int.Parse(u.Age) > 20);
+
+
+        var totalActiveUsers = users.Count(u => u.IsActive);
+
+        
+
+
     }
 
 }
