@@ -109,6 +109,41 @@ class LinkConceptsScenario
             Console.WriteLine($"Payment Id: {payment.Id}, UserId: {payment.UserId}, Rounded Amount: {payment.RoundedAmount}");
         }
 
+
+        var userPayments = users.Join(payments, u => u.Id, p => p.UserId, (u, p) => new
+        {
+            UserName = u.Name,
+            PaymentAmount = p.Amount,
+            PaymentStatus = p.Status
+        }).ToList();
+        Console.WriteLine("User Payments:");
+        foreach (var up in userPayments)
+        {
+            Console.WriteLine($"User: {up.UserName}, Amount: {up.PaymentAmount}, Status: {up.PaymentStatus}");
+        }
+
+
+        var userPayemntsQ = from u in users
+                            join p in payments on u.Id equals p.UserId
+                            select new
+                            {
+                                UserName = u.Name,
+                                PaymentAmount = p.Amount,
+                                PaymentStatus = p.Status
+                            };
+        Console.WriteLine("User Payments (Query Syntax):");
+        foreach (var up in userPayemntsQ)
+        {
+            Console.WriteLine($"User: {up.UserName}, Amount: {up.PaymentAmount}, Status: {up.PaymentStatus}");
+        }
+
+
+
+
+
+
+
+
     }
 
 }
