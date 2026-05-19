@@ -159,8 +159,22 @@ class LinkConceptsScenario
         }
 
 
-        var userWith
-
+        var userWithMaxP = users.
+        Join(payments,
+            u => u.Id,
+            p => p.UserId,
+            (u , p) => new
+            {
+                UserName = u.Name,
+                PaymentAmount = p.Amount
+            })
+            .Where(x => x.PaymentAmount == payments.Max(p => p.Amount))
+            .ToList();
+        Console.WriteLine("User with Maximum Payment:");
+        foreach (var up in userWithMaxP)
+        {
+            Console.WriteLine($"User: {up.UserName}, Amount: {up.PaymentAmount}");
+        }
 
 
 
